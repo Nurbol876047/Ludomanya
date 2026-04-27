@@ -70,56 +70,48 @@ export default function HomePage() {
         <div className="grid flex-1 items-center gap-12 py-8 sm:py-12 lg:grid-cols-[1fr_1fr] xl:grid-cols-[1fr_1.2fr] w-full">
           <div
             className="relative w-full"
-            style={{ perspective: "1000px" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            style={{ perspective: "1200px" }}
           >
             <div
-              className="will-change-transform w-full"
+              className="will-change-transform w-full origin-left"
               style={{
                 transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-                transition: "transform 0.15s ease-out",
+                transition: "transform 0.1s ease-out",
                 transformStyle: "preserve-3d"
               }}
             >
-              <p
-                className="text-sm font-bold uppercase tracking-[0.25em] text-lime-300 drop-shadow-md sm:text-base sm:tracking-[0.3em]"
-                style={{ transform: "translateZ(30px)" }}
-              >
-                Математикалық анти-дот
-              </p>
-              <h1
-                className="mt-4 text-[clamp(4rem,15vw,9rem)] font-black leading-[0.9] tracking-normal text-white"
-                style={{
-                  transform: "translateZ(60px)",
-                  textShadow: "0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(25, 246, 255, 0.3)"
-                }}
-              >
-                Sanaly Bet
-              </h1>
-              <p
-                className="mt-6 text-lg leading-8 text-white/90 drop-shadow-md sm:text-xl sm:leading-9 md:w-4/5 xl:w-3/4"
-                style={{ transform: "translateZ(40px)" }}
-              >
-                Неліктен адамдар ұтыла береді? Бұл жоба құмар ойынның иллюзиясын
-                математикалық формулалар мен нақты деректер арқылы бұзады.
-              </p>
+              <div style={{ transform: "translateZ(40px)" }}>
+                <p className="text-sm font-bold uppercase tracking-[0.25em] text-lime-300 drop-shadow-md sm:text-base sm:tracking-[0.3em]">
+                  Математикалық анти-дот
+                </p>
+                <h1
+                  className="mt-4 text-[clamp(4rem,15vw,9rem)] font-black leading-[0.9] tracking-normal text-white"
+                  style={{
+                    textShadow: "0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(25, 246, 255, 0.3)"
+                  }}
+                >
+                  Sanaly Bet
+                </h1>
+                <p className="mt-6 text-lg leading-8 text-white/90 drop-shadow-md sm:text-xl sm:leading-9 md:w-4/5 xl:w-3/4">
+                  Неліктен адамдар ұтыла береді? Бұл жоба құмар ойынның иллюзиясын
+                  математикалық формулалар мен нақты деректер арқылы бұзады.
+                </p>
+              </div>
+
               <div
                 className="mt-9 flex flex-col gap-5 sm:mt-12 sm:flex-row sm:flex-wrap sm:items-center w-full"
                 style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }}
               >
                 <Link
                   href="/time-loss"
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-xl border border-cyan-300/45 bg-cyan-300/15 px-8 py-5 text-base font-black uppercase tracking-[0.16em] text-cyan-50 shadow-[0_0_20px_rgba(25,246,255,0.15)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_rgba(25,246,255,0.4)] hover:border-cyan-100 sm:w-auto sm:tracking-[0.18em] active:scale-95"
-                  style={{ transform: "translateZ(20px)" }}
+                  className="group relative z-50 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-cyan-300/45 bg-cyan-300/15 px-8 py-5 text-base font-black uppercase tracking-[0.16em] text-cyan-50 shadow-[0_0_20px_rgba(25,246,255,0.15)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_rgba(25,246,255,0.4)] hover:border-cyan-100 sm:w-auto sm:tracking-[0.18em] active:scale-95"
                 >
                   <Play className="h-5 w-5 fill-current transition-transform group-hover:scale-110" aria-hidden="true" />
                   <span>Талдауды бастау</span>
                 </Link>
-                <span
-                  className="text-base leading-6 text-white/70 sm:w-2/3 lg:w-1/2"
-                  style={{ transform: "translateZ(10px)" }}
-                >
+                <span className="text-base leading-6 text-white/70 sm:w-2/3 lg:w-1/2">
                   10 ғылыми кезең. Уақыт, ықтималдық және психологиялық цикл.
                 </span>
               </div>
