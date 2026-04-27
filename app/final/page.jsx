@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { RotateCcw } from "lucide-react";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
@@ -7,10 +8,26 @@ import { formatCurrency, formatNumber } from "@/lib/format";
 import { computeRiskScore, useSanalyData } from "@/lib/storage";
 
 export default function FinalPage() {
-  const { data, resetData } = useSanalyData();
+  const { data, resetData, hydrated } = useSanalyData();
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !hydrated) {
+    return (
+      <StageShell eyebrow="Қорытынды" title="Жүктелуде...">
+        <div className="grid h-64 place-items-center text-sm font-semibold uppercase tracking-widest text-white/40">
+          Деректер есептелуде...
+        </div>
+      </StageShell>
+    );
+  }
+
   const riskScore = computeRiskScore(data);
-  const annualDays = data.timeLoss.annualHours / 24;
+  const annualDays = (data.timeLoss.annualHours || 0) / 24;
   const monteLoss = Math.max(0, -data.monteCarlo.finalBalance);
   const observedLoss = data.lossTimer.simulatedLoss + monteLoss;
 

@@ -49,12 +49,16 @@ export default function MonteCarloPage() {
   const [win, setWin] = useState(1200);
   const [loss, setLoss] = useState(1000);
   const [mounted, setMounted] = useState(false);
-  const [result, setResult] = useState(() =>
-    simulateGames({ probability: 42, win: 1200, loss: 1000 })
-  );
+  const [result, setResult] = useState({
+    chart: [{ game: 0, balance: 0 }],
+    finalBalance: 0,
+    minBalance: 0,
+    lossRatio: 0
+  });
 
   useEffect(() => {
     setMounted(true);
+    setResult(simulateGames({ probability: 42, win: 1200, loss: 1000 }));
   }, []);
 
   useEffect(() => {
