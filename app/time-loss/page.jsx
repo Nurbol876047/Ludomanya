@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatNumber } from "@/lib/format";
+import { timeLossHeroMath } from "@/lib/heroMath";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
 function AnalogClock({ hoursPerDay }) {
@@ -130,7 +131,12 @@ export default function TimeLossPage() {
   };
 
   return (
-    <StageShell eyebrow="Идея 1" title="Уақыт кетіп жатыр">
+    <StageShell
+      eyebrow="Идея 1"
+      title="Уақыт кетіп жатыр"
+      compactHero
+      heroMath={timeLossHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
         <div 
           className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200"

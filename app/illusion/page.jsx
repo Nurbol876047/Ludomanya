@@ -14,6 +14,7 @@ import {
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatCurrency } from "@/lib/format";
+import { illusionHeroMath } from "@/lib/heroMath";
 import { saveSanalyData } from "@/lib/storage";
 
 const illusionSeries = [
@@ -70,7 +71,12 @@ export default function IllusionPage() {
   }
 
   return (
-    <StageShell eyebrow="Когнитивті қате" title="Жеңіс иллюзиясы">
+    <StageShell
+      eyebrow="Когнитивті қате"
+      title="Жеңіс иллюзиясы"
+      compactHero
+      heroMath={illusionHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
         <div className="panel h-[360px] rounded-3xl p-3 sm:h-[440px] sm:p-6 lg:h-[520px]">
           {mounted ? (

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Camera, MousePointer2 } from "lucide-react";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
+import { gestureHeroMath } from "@/lib/heroMath";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
 const TASKS_VERSION = "0.10.34";
@@ -256,7 +257,12 @@ export default function GestureGamePage() {
   }, []);
 
   return (
-    <StageShell eyebrow="Идея 3" title="MediaPipe Hands ойыны">
+    <StageShell
+      eyebrow="Идея 3"
+      title="MediaPipe Hands ойыны"
+      compactHero
+      heroMath={gestureHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <div
           ref={areaRef}

@@ -5,6 +5,7 @@ import { RotateCcw } from "lucide-react";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatCurrency, formatNumber } from "@/lib/format";
+import { finalHeroMath, formulaSummary } from "@/lib/heroMath";
 import { computeRiskScore, useSanalyData } from "@/lib/storage";
 
 export default function FinalPage() {
@@ -18,7 +19,12 @@ export default function FinalPage() {
 
   if (!mounted || !hydrated) {
     return (
-      <StageShell eyebrow="Қорытынды" title="Жүктелуде...">
+      <StageShell
+        eyebrow="Қорытынды"
+        title="Жүктелуде..."
+        compactHero
+        heroMath={finalHeroMath}
+      >
         <div className="grid h-64 place-items-center text-sm font-semibold uppercase tracking-widest text-white/40">
           Деректер есептелуде...
         </div>
@@ -40,7 +46,12 @@ export default function FinalPage() {
   };
 
   return (
-    <StageShell eyebrow="Қорытынды" title="Сенің шешімің — сенің болашағың">
+    <StageShell
+      eyebrow="Қорытынды"
+      title="Сенің шешімің — сенің болашағың"
+      compactHero
+      heroMath={finalHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div 
           className="panel rounded-3xl p-6 sm:p-8 transition-transform duration-200 ease-out"
@@ -132,13 +143,15 @@ export default function FinalPage() {
 
           <div className="panel rounded-3xl p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-200/70">
-              Математикалық қорытынды
+              Барлық формулалар
             </p>
-            <p className="mt-5 text-lg font-black leading-7 text-white sm:text-xl sm:leading-8">
-              Ойын қысқа сәтте қызық көрінуі мүмкін, бірақ уақыт, күтілетін
-              мән және симуляция ұзақ перспективада бір бағытты көрсетеді:
-              бақылауды өзіңе қайтару керек.
-            </p>
+            <div className="mt-5 grid gap-3 font-mono text-sm leading-6 text-white/70 sm:text-base">
+              {formulaSummary.map((formula) => (
+                <div key={formula} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                  {formula}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

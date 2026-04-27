@@ -12,6 +12,44 @@ const cycleStages = [
   { title: "қайта ойнау", tone: "border-amber-300/45 text-amber-100", x: 12, y: 44 }
 ];
 
+const cycleHeroMath = {
+  leftFormula: (
+    <div className="text-[clamp(2.25rem,5.5vw,4.2rem)] font-serif italic text-white leading-none tracking-tighter">
+      S<sub className="text-[0.45em]">t+1</sub>
+      <span className="mx-3 text-white/40">=</span>
+      M · S<sub className="text-[0.45em]">t</sub>
+    </div>
+  ),
+  leftLabel: "Марков тізбегіндегі күй ауысуы",
+  rightFormula: (
+    <span className="flex flex-col items-end gap-1 text-[clamp(2rem,4.4vw,3.9rem)] sm:block">
+      <span>P(R<sub className="text-[0.45em]">k</sub>)</span>
+      <span className="sm:ml-3">= 1 − (1 − r)<sup className="text-[0.45em]">k</sup></span>
+    </span>
+  ),
+  rightLabel: "Циклге қайта оралу ықтималдығы",
+  symbolsTitle: "Цикл айнымалылары:",
+  symbols: [
+    ["Sₜ", "қазіргі психологиялық күй векторы"],
+    ["M", "қызығушылықтан қайта ойынға өтудің матрицасы"],
+    ["r", "бір триггерден кейін қайту ықтималдығы"],
+    ["k", "қайталанған триггерлер саны"]
+  ],
+  verdictTitle: "Циклдің математикалық мәні:",
+  verdict: (
+    <>
+      Егер <b className="text-cyan-400 underline decoration-cyan-400/30 underline-offset-8">r &gt; 0</b> болса, әр жаңа триггер <span className="text-white font-black">P(R<sub>k</sub>)</span> мәнін өсіреді.
+    </>
+  ),
+  statementTitle: "Бір айналым келесісін күшейтеді",
+  statement:
+    "Тәуелділік циклі жеке шешім емес: қызығушылық, ойын, ұтылу және қайта ойнау бір-біріне ықтималдық арқылы өтетін қайталанатын жүйе.",
+  symbolsTextClassName: "text-lg sm:text-xl",
+  verdictTextClassName: "text-lg sm:text-xl",
+  statementTextClassName: "text-xl sm:text-2xl",
+  watermark: "M·Sₜ"
+};
+
 export default function CyclePage() {
   const { data } = useSanalyData();
   const [step, setStep] = useState(0);
@@ -69,7 +107,12 @@ export default function CyclePage() {
   }
 
   return (
-    <StageShell eyebrow="Идея 4" title="Тәуелділік циклі">
+    <StageShell
+      eyebrow="Идея 4"
+      title="Тәуелділік циклі"
+      compactHero
+      heroMath={cycleHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-center">
         <div
           className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200 ease-out"
@@ -139,10 +182,10 @@ export default function CyclePage() {
               Бір айналым тағы бір айналымды шақырады
             </h2>
             <p 
-              className="mt-4 text-sm leading-6 text-white/60"
+              className="mt-4 text-base leading-7 text-white/65 sm:text-lg sm:leading-8"
               style={{ transform: "translateZ(30px)" }}
             >
-              {"Математикалық тұрғыда бұл - қайтымды процесс. Әрбір жеңіліс дофаминдік тепе-теңдікті бұзып, сізді бастапқы нүктеге қайтарады. $P(\\text{қайту}) \\to 1$."}
+              {"Математикалық тұрғыда бұл - Марков тізбегі: келесі күй көбіне қазіргі күйге тәуелді. Формула: S(t+1) = M · S(t), ал қайталанған триггерлерде P(Rk) = 1 - (1 - r)^k өседі."}
             </p>
             <button
               type="button"

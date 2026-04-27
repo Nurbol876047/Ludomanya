@@ -6,6 +6,39 @@ import MetricCard from "@/components/MetricCard";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
+const lossTimerHeroMath = {
+  leftFormula: (
+    <div className="text-[clamp(2.25rem,5vw,4rem)] font-serif italic text-white leading-none tracking-tighter">
+      P(L<sub className="text-[0.45em]">t</sub> ≥ 1)
+      <span className="mx-3 text-white/40">=</span>
+      1 − (1 − q)<sup className="text-[0.45em]">t</sup>
+    </div>
+  ),
+  leftLabel: "t қадамда кемі бір ұтылыс ықтималдығы",
+  rightFormula: (
+    <span>
+      E[L<sub className="text-[0.45em]">t</sub>] = t · q · b
+    </span>
+  ),
+  rightLabel: "Күтілетін жинақталған шығын",
+  symbolsTitle: "Формуладағы шамалар:",
+  symbols: [
+    ["q", "бір ставкадағы ұтылу ықтималдығы"],
+    ["t", "уақыт ішіндегі ставкалар саны"],
+    ["b", "бір ставканың құны"]
+  ],
+  verdictTitle: "Ықтималдық ережесі:",
+  verdict: (
+    <>
+      Егер <b className="text-cyan-400 underline decoration-cyan-400/30 underline-offset-8">q &gt; 0</b> болса, онда <span className="text-white font-black">1 − (1 − q)<sup>t</sup></span> уақыт өткен сайын 1-ге жақындайды.
+    </>
+  ),
+  statementTitle: "Ықтималдық уақытқа көбейеді",
+  statement:
+    "Қаржылық таймер әр секундтағы ставканы ықтимал шығынмен байланыстырады: серия ұзара берген сайын кездейсоқтық емес, қайталанған тәуекел негізгі күшке айналады.",
+  watermark: "1−(1−q)^t"
+};
+
 export default function LossTimerPage() {
   const { data, hydrated } = useSanalyData();
   const [bet, setBet] = useState(1000);
@@ -87,7 +120,12 @@ export default function LossTimerPage() {
   }
 
   return (
-    <StageShell eyebrow="Идея 2" title="Қаржылық таймер">
+    <StageShell
+      eyebrow="Идея 2"
+      title="Қаржылық таймер"
+      compactHero
+      heroMath={lossTimerHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="panel rounded-3xl p-6 sm:p-8">
           <div className="flex items-center justify-between gap-4">

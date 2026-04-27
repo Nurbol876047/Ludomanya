@@ -14,6 +14,7 @@ import {
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatCurrency, formatNumber } from "@/lib/format";
+import { monteCarloHeroMath } from "@/lib/heroMath";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
 function simulateGames({ probability, win, loss }) {
@@ -107,7 +108,12 @@ export default function MonteCarloPage() {
   }, [loss, probability, win]);
 
   return (
-    <StageShell eyebrow="Monte Carlo" title="1000 ойын симуляциясы">
+    <StageShell
+      eyebrow="Monte Carlo"
+      title="1000 ойын симуляциясы"
+      compactHero
+      heroMath={monteCarloHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
         <div className="space-y-5">
           <div className="panel rounded-3xl p-6 sm:p-8">

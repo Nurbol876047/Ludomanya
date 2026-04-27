@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatNumber } from "@/lib/format";
+import { spiderHeroMath } from "@/lib/heroMath";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
 function createNodes(count, width, height) {
@@ -163,7 +164,12 @@ export default function SpiderMindPage() {
   }
 
   return (
-    <StageShell eyebrow="Canvas effect" title="Ой паутинасы">
+    <StageShell
+      eyebrow="Canvas effect"
+      title="Ой паутинасы"
+      compactHero
+      heroMath={spiderHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <div
           ref={wrapRef}

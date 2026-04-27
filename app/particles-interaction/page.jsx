@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import StageShell from "@/components/StageShell";
 import MetricCard from "@/components/MetricCard";
 import { formatNumber } from "@/lib/format";
+import { particlesHeroMath } from "@/lib/heroMath";
 import { saveSanalyData, useSanalyData } from "@/lib/storage";
 
 function clamp(value, min, max) {
@@ -95,7 +96,12 @@ export default function ParticlesInteractionPage() {
   }
 
   return (
-    <StageShell eyebrow="GSAP interaction" title="Жылдам шешім">
+    <StageShell
+      eyebrow="GSAP interaction"
+      title="Жылдам шешім"
+      compactHero
+      heroMath={particlesHeroMath}
+    >
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <div
           ref={fieldRef}
