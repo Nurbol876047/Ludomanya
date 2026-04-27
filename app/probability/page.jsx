@@ -140,8 +140,8 @@ export default function ProbabilityPage() {
     <StageShell eyebrow="Ықтималдық теориясы" title="Математикалық шындық">
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="space-y-5">
-          <div className="panel rounded-3xl p-6 sm:p-8 transition-all hover:shadow-[0_0_40px_rgba(25,246,255,0.1)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-200/70">
+          <div className="panel rounded-3xl p-6 sm:p-8 border-none bg-white/50">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
               $E = p \cdot W - (1-p) \cdot L$
             </p>
             <div className="mt-7 grid gap-5">
@@ -184,9 +184,9 @@ export default function ProbabilityPage() {
             </div>
           </div>
 
-          <div className="panel rounded-3xl p-5 bg-cyan-900/10 border-cyan-500/20">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-200">Мысал: Еуропалық рулетка</h3>
-            <p className="mt-2 text-xs leading-5 text-white/50">
+          <div className="panel rounded-3xl p-6 bg-blue-50 border-blue-100">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-blue-700">Мысал: Еуропалық рулетка</h3>
+            <p className="mt-3 text-[13px] leading-relaxed text-slate-600 font-medium">
               Рулеткада 37 сан бар. Егер сіз бір санға тіксеңіз: <br/>
               $p = 1/37 \approx 2.7\%$. Ұтыс — 35:1. <br/>
               $E = (1/37) \cdot 35 - (36/37) \cdot 1 = -0.027$. <br/>

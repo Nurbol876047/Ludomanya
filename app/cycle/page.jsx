@@ -63,7 +63,7 @@ export default function CyclePage() {
     <StageShell eyebrow="Идея 4" title="Тәуелділік циклі">
       <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-center">
         <div 
-          className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200 ease-out"
+          className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200 ease-out border-none bg-slate-50"
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setRotate({ x: 0, y: 0 })}
           style={{ 
@@ -71,14 +71,14 @@ export default function CyclePage() {
             transformStyle: "preserve-3d"
           }}
         >
-          <div className="relative mx-auto aspect-square w-full max-w-[420px] rounded-full border border-white/15 bg-black/40 sm:max-w-[560px]" style={{ transformStyle: "preserve-3d" }}>
-            <div className="absolute inset-[13%] rounded-full border border-dashed border-cyan-200/30" style={{ transform: "translateZ(20px)" }} />
-            <div className="absolute inset-[28%] rounded-full border border-white/10 bg-white/[0.03]" style={{ transform: "translateZ(40px)" }} />
+          <div className="relative mx-auto aspect-square w-full max-w-[420px] rounded-full border border-slate-200 bg-white sm:max-w-[560px]" style={{ transformStyle: "preserve-3d" }}>
+            <div className="absolute inset-[13%] rounded-full border border-dashed border-blue-200/50" style={{ transform: "translateZ(20px)" }} />
+            <div className="absolute inset-[28%] rounded-full border border-slate-100 bg-slate-50/50" style={{ transform: "translateZ(40px)" }} />
 
             {cycleStages.map((item, index) => (
               <div
                 key={item.title}
-                className={`absolute w-[5.4rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-black/70 px-2 py-2 text-center text-[10px] font-black uppercase tracking-normal shadow-lg sm:w-32 sm:rounded-2xl sm:px-3 sm:py-3 sm:text-sm sm:tracking-[0.08em] ${item.tone}`}
+                className={`absolute w-[5.4rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-white px-2 py-2 text-center text-[10px] font-bold uppercase tracking-normal shadow-md sm:w-32 sm:rounded-2xl sm:px-3 sm:py-3 sm:text-sm sm:tracking-[0.08em] ${index === step ? 'border-blue-400 text-blue-600' : 'border-slate-100 text-slate-400'}`}
                 style={{ 
                   left: `${item.x}%`, 
                   top: `${item.y}%`,
@@ -86,21 +86,21 @@ export default function CyclePage() {
                   transition: "all 0.3s ease-out"
                 }}
               >
-                <span className="block text-[11px] opacity-55">0{index + 1}</span>
+                <span className="block text-[11px] opacity-40">0{index + 1}</span>
                 {item.title}
               </div>
             ))}
 
             <div
-              className="absolute left-1/2 top-1/2 h-[35%] w-1 origin-bottom rounded-full bg-cyan-200 transition-transform duration-300"
+              className="absolute left-1/2 top-1/2 h-[35%] w-1 origin-bottom rounded-full bg-blue-500 transition-transform duration-300"
               style={{ 
                 transform: `translate(-50%, -100%) rotate(${angle}deg) translateZ(100px)`,
               }}
             >
-              <span className="absolute -top-2 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-cyan-100 shadow-[0_0_20px_#19f6ff]" />
+              <span className="absolute -top-2 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-white border-4 border-blue-500 shadow-sm" />
             </div>
             <div 
-              className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/45 bg-cyan-300/10 shadow-cyan"
+              className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-100 bg-blue-50 shadow-sm"
               style={{ transform: "translate(-50%, -50%) translateZ(50px)" }}
             />
           </div>
@@ -126,7 +126,7 @@ export default function CyclePage() {
               Симуляциялау
             </button>
             {message ? (
-              <div className="mt-5 rounded-2xl border border-red-300/30 bg-red-400/10 p-5 text-lg font-black text-red-100">
+              <div className="mt-6 rounded-2xl bg-red-50 p-5 text-lg font-bold text-red-700 border border-red-100 shadow-sm">
                 Сен осы циклде қалып отырсың
               </div>
             ) : null}
@@ -137,7 +137,7 @@ export default function CyclePage() {
             <MetricCard
               label="Ағымдағы кезең"
               value={cycleStages[step].title}
-              tone={step === 2 ? "red" : "cyan"}
+              tone={step === 2 ? "red" : "blue"}
             />
           </div>
         </div>

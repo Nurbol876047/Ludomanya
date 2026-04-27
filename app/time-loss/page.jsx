@@ -34,32 +34,32 @@ function AnalogClock({ hoursPerDay }) {
   }, [speed]);
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[340px] rounded-full border border-cyan-200/30 bg-black/55 shadow-cyan sm:max-w-[420px]">
-      <div className="absolute inset-5 rounded-full border border-white/15" />
+    <div className="relative mx-auto aspect-square w-full max-w-[340px] rounded-full border border-slate-200 bg-slate-50 shadow-sm sm:max-w-[420px]">
+      <div className="absolute inset-5 rounded-full border border-slate-100" />
       {Array.from({ length: 12 }).map((_, index) => (
         <span
           key={index}
           className="absolute left-1/2 top-1/2 h-[46%] w-px origin-bottom"
           style={{ transform: `translate(-50%, -100%) rotate(${index * 30}deg)` }}
         >
-          <span className="block h-4 w-px rounded-full bg-white/35" />
+          <span className="block h-4 w-px rounded-full bg-slate-300" />
         </span>
       ))}
-      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(25,246,255,0.16),transparent_42%)]" />
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.08),transparent_42%)]" />
       <div
-        className="absolute left-1/2 top-1/2 h-[28%] w-2 origin-bottom rounded-full bg-lime-300"
+        className="absolute left-1/2 top-1/2 h-[28%] w-2 origin-bottom rounded-full bg-blue-500 shadow-sm"
         style={{ transform: `translate(-50%, -100%) rotate(${angles.hour}deg)` }}
       />
       <div
-        className="absolute left-1/2 top-1/2 h-[36%] w-1.5 origin-bottom rounded-full bg-cyan-200"
+        className="absolute left-1/2 top-1/2 h-[36%] w-1.5 origin-bottom rounded-full bg-blue-300 shadow-sm"
         style={{ transform: `translate(-50%, -100%) rotate(${angles.minute}deg)` }}
       />
       <div
-        className="absolute left-1/2 top-1/2 h-[43%] w-px origin-bottom rounded-full bg-red-300 shadow-danger"
+        className="absolute left-1/2 top-1/2 h-[43%] w-px origin-bottom rounded-full bg-red-500"
         style={{ transform: `translate(-50%, -100%) rotate(${angles.second}deg)` }}
       />
-      <div className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/40 bg-white" />
-      <div className="absolute inset-x-0 bottom-16 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
+      <div className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-slate-300 bg-white shadow-sm" />
+      <div className="absolute inset-x-0 bottom-16 text-center text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
         x{formatNumber(speed, 1)}
       </div>
     </div>
@@ -93,20 +93,20 @@ export default function TimeLossPage() {
   return (
     <StageShell eyebrow="Идея 1" title="Уақыт кетіп жатыр">
       <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-        <div className="panel rounded-3xl p-4 sm:p-8">
+        <div className="panel rounded-3xl p-4 sm:p-8 border-none bg-white/50">
           <AnalogClock hoursPerDay={hoursPerDay} />
         </div>
 
         <div className="space-y-5">
-          <div className="panel rounded-3xl p-4 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/70">
+          <div className="panel rounded-3xl p-4 sm:p-8 bg-white">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-red-600">
               Сен уақыт жоғалтып жатырсың
             </p>
             <div className="mt-6">
-              <label className="text-sm font-semibold text-white/70" htmlFor="hours">
+              <label className="text-sm font-bold text-slate-500" htmlFor="hours">
                 Күніне ойынға кететін уақыт
               </label>
-              <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_130px]">
+              <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_130px]">
                 <input
                   id="hours"
                   className="range"
@@ -118,7 +118,7 @@ export default function TimeLossPage() {
                   onChange={(event) => applyHours(Number(event.target.value))}
                 />
                 <input
-                  className="control text-center"
+                  className="control text-center font-bold"
                   type="number"
                   min="0"
                   max="24"
@@ -131,7 +131,7 @@ export default function TimeLossPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <MetricCard label="Күніне" value={`${formatNumber(hoursPerDay, 1)} сағ`} />
+            <MetricCard label="Күніне" value={`${formatNumber(hoursPerDay, 1)} сағ`} tone="blue" />
             <MetricCard
               label="Жылына"
               value={`${formatNumber(annualHours)} сағ`}
