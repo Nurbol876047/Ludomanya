@@ -18,6 +18,7 @@ export default function CyclePage() {
   const [running, setRunning] = useState(false);
   const [message, setMessage] = useState(false);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [infoRotate, setInfoRotate] = useState({ x: 0, y: 0 });
 
   const angle = useMemo(() => step * 90, [step]);
 
@@ -27,6 +28,14 @@ export default function CyclePage() {
     const x = ((clientY - top) / height - 0.5) * -15;
     const y = ((clientX - left) / width - 0.5) * 15;
     setRotate({ x, y });
+  };
+
+  const handleInfoMove = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { width, height, left, top } = currentTarget.getBoundingClientRect();
+    const x = ((clientY - top) / height - 0.5) * -8;
+    const y = ((clientX - left) / width - 0.5) * 8;
+    setInfoRotate({ x, y });
   };
 
   useEffect(() => {
@@ -62,59 +71,77 @@ export default function CyclePage() {
   return (
     <StageShell eyebrow="Идея 4" title="Тәуелділік циклі">
       <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-        <div 
-          className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200 ease-out border-none bg-slate-50"
+        <div
+          className="panel rounded-3xl p-4 sm:p-8 transition-transform duration-200 ease-out"
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setRotate({ x: 0, y: 0 })}
-          style={{ 
+          style={{
             transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
             transformStyle: "preserve-3d"
           }}
         >
-          <div className="relative mx-auto aspect-square w-full max-w-[420px] rounded-full border border-slate-200 bg-white sm:max-w-[560px]" style={{ transformStyle: "preserve-3d" }}>
-            <div className="absolute inset-[13%] rounded-full border border-dashed border-blue-200/50" style={{ transform: "translateZ(20px)" }} />
-            <div className="absolute inset-[28%] rounded-full border border-slate-100 bg-slate-50/50" style={{ transform: "translateZ(40px)" }} />
+          <div className="relative mx-auto aspect-square w-full max-w-[420px] rounded-full border border-white/15 bg-black/40 sm:max-w-[560px]" style={{ transformStyle: "preserve-3d" }}>
+            <div className="absolute inset-[13%] rounded-full border border-dashed border-cyan-200/30" style={{ transform: "translateZ(20px)" }} />
+            <div className="absolute inset-[28%] rounded-full border border-white/10 bg-white/[0.03]" style={{ transform: "translateZ(40px)" }} />
 
             {cycleStages.map((item, index) => (
               <div
                 key={item.title}
-                className={`absolute w-[5.4rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-white px-2 py-2 text-center text-[10px] font-bold uppercase tracking-normal shadow-md sm:w-32 sm:rounded-2xl sm:px-3 sm:py-3 sm:text-sm sm:tracking-[0.08em] ${index === step ? 'border-blue-400 text-blue-600' : 'border-slate-100 text-slate-400'}`}
-                style={{ 
-                  left: `${item.x}%`, 
+                className={`absolute w-[5.4rem] -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-black/70 px-2 py-2 text-center text-[10px] font-black uppercase tracking-normal shadow-lg sm:w-32 sm:rounded-2xl sm:px-3 sm:py-3 sm:text-sm sm:tracking-[0.08em] ${item.tone}`}
+                style={{
+                  left: `${item.x}%`,
                   top: `${item.y}%`,
                   transform: `translate(-50%, -50%) translateZ(${index === step ? '90px' : '60px'}) scale(${index === step ? 1.1 : 1})`,
                   transition: "all 0.3s ease-out"
                 }}
               >
-                <span className="block text-[11px] opacity-40">0{index + 1}</span>
+                <span className="block text-[11px] opacity-55">0{index + 1}</span>
                 {item.title}
               </div>
             ))}
 
             <div
-              className="absolute left-1/2 top-1/2 h-[35%] w-1 origin-bottom rounded-full bg-blue-500 transition-transform duration-300"
-              style={{ 
+              className="absolute left-1/2 top-1/2 h-[35%] w-1 origin-bottom rounded-full bg-cyan-200 transition-transform duration-300"
+              style={{
                 transform: `translate(-50%, -100%) rotate(${angle}deg) translateZ(100px)`,
               }}
             >
-              <span className="absolute -top-2 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-white border-4 border-blue-500 shadow-sm" />
+              <span className="absolute -top-2 left-1/2 h-5 w-5 -translate-x-1/2 rounded-full bg-cyan-100 shadow-[0_0_20px_#19f6ff]" />
             </div>
-            <div 
-              className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-100 bg-blue-50 shadow-sm"
+            <div
+              className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/45 bg-cyan-300/10 shadow-cyan"
               style={{ transform: "translate(-50%, -50%) translateZ(50px)" }}
             />
           </div>
         </div>
 
         <div className="space-y-5">
-          <div className="panel rounded-3xl p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/70">
+          <div 
+            className="panel rounded-3xl p-6 sm:p-8 transition-transform duration-200"
+            onMouseMove={handleInfoMove}
+            onMouseLeave={() => setInfoRotate({ x: 0, y: 0 })}
+            style={{
+              perspective: "1000px",
+              transform: `rotateX(${infoRotate.x}deg) rotateY(${infoRotate.y}deg)`,
+              transformStyle: "preserve-3d"
+            }}
+          >
+            <p 
+              className="text-sm font-semibold uppercase tracking-[0.25em] text-red-200/70"
+              style={{ transform: "translateZ(20px)" }}
+            >
               Марков тізбегі
             </p>
-            <h2 className="mt-4 text-2xl font-black tracking-normal text-white sm:text-3xl">
+            <h2 
+              className="mt-4 text-2xl font-black tracking-normal text-white sm:text-3xl"
+              style={{ transform: "translateZ(40px)" }}
+            >
               Бір айналым тағы бір айналымды шақырады
             </h2>
-            <p className="mt-4 text-sm leading-6 text-white/60">
+            <p 
+              className="mt-4 text-sm leading-6 text-white/60"
+              style={{ transform: "translateZ(30px)" }}
+            >
               {"Математикалық тұрғыда бұл - қайтымды процесс. Әрбір жеңіліс дофаминдік тепе-теңдікті бұзып, сізді бастапқы нүктеге қайтарады. $P(\\text{қайту}) \\to 1$."}
             </p>
             <button
@@ -122,11 +149,15 @@ export default function CyclePage() {
               onClick={simulate}
               disabled={running}
               className="mt-7 w-full rounded-xl border border-cyan-300/40 bg-cyan-300/10 px-5 py-4 text-sm font-black uppercase tracking-[0.18em] text-cyan-50 transition hover:border-cyan-100 disabled:cursor-wait disabled:opacity-55"
+              style={{ transform: "translateZ(50px)" }}
             >
               Симуляциялау
             </button>
             {message ? (
-              <div className="mt-6 rounded-2xl bg-red-50 p-5 text-lg font-bold text-red-700 border border-red-100 shadow-sm">
+              <div 
+                className="mt-5 rounded-2xl border border-red-300/30 bg-red-400/10 p-5 text-lg font-black text-red-100"
+                style={{ transform: "translateZ(60px)" }}
+              >
                 Сен осы циклде қалып отырсың
               </div>
             ) : null}
@@ -137,7 +168,7 @@ export default function CyclePage() {
             <MetricCard
               label="Ағымдағы кезең"
               value={cycleStages[step].title}
-              tone={step === 2 ? "red" : "blue"}
+              tone={step === 2 ? "red" : "cyan"}
             />
           </div>
         </div>

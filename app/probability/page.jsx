@@ -27,11 +27,11 @@ function ExpectedGraph({ expectedValue, loss }) {
   };
 
   return (
-    <div 
+    <div
       className="relative cursor-crosshair"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setRotate({ x: 0, y: 0 })}
-      style={{ 
+      style={{
         perspective: "1000px",
         transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
         transition: "transform 0.1s ease-out"
@@ -84,6 +84,7 @@ export default function ProbabilityPage() {
   const [probability, setProbability] = useState(42);
   const [win, setWin] = useState(1200);
   const [loss, setLoss] = useState(1000);
+  const [calcRotate, setCalcRotate] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (hydrated) {
@@ -136,15 +137,35 @@ export default function ProbabilityPage() {
     persistProbability(probability, win, value);
   }
 
+  const handleCalcMove = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { width, height, left, top } = currentTarget.getBoundingClientRect();
+    const x = ((clientY - top) / height - 0.5) * -8;
+    const y = ((clientX - left) / width - 0.5) * 8;
+    setCalcRotate({ x, y });
+  };
+
   return (
     <StageShell eyebrow="Ықтималдық теориясы" title="Математикалық шындық">
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="space-y-5">
-          <div className="panel rounded-3xl p-6 sm:p-8 border-none bg-white/50">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
+          <div 
+            className="panel rounded-3xl p-6 sm:p-8 transition-transform duration-200 ease-out"
+            onMouseMove={handleCalcMove}
+            onMouseLeave={() => setCalcRotate({ x: 0, y: 0 })}
+            style={{
+              perspective: "1000px",
+              transform: `rotateX(${calcRotate.x}deg) rotateY(${calcRotate.y}deg)`,
+              transformStyle: "preserve-3d"
+            }}
+          >
+            <p 
+              className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-200/70"
+              style={{ transform: "translateZ(20px)" }}
+            >
               $E = p \cdot W - (1-p) \cdot L$
             </p>
-            <div className="mt-7 grid gap-5">
+            <div className="mt-7 grid gap-5" style={{ transform: "translateZ(40px)" }}>
               <label>
                 <span className="text-sm font-semibold text-white/70">
                   Ұту ықтималдығы: {formatNumber(probability, 1)}%
@@ -184,12 +205,12 @@ export default function ProbabilityPage() {
             </div>
           </div>
 
-          <div className="panel rounded-3xl p-6 bg-blue-50 border-blue-100">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-blue-700">Мысал: Еуропалық рулетка</h3>
-            <p className="mt-3 text-[13px] leading-relaxed text-slate-600 font-medium">
-              Рулеткада 37 сан бар. Егер сіз бір санға тіксеңіз: <br/>
-              $p = 1/37 \approx 2.7\%$. Ұтыс — 35:1. <br/>
-              $E = (1/37) \cdot 35 - (36/37) \cdot 1 = -0.027$. <br/>
+          <div className="panel rounded-3xl p-5 bg-cyan-900/10 border-cyan-500/20">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-200">Мысал: Еуропалық рулетка</h3>
+            <p className="mt-2 text-xs leading-5 text-white/50">
+              Рулеткада 37 сан бар. Егер сіз бір санға тіксеңіз: <br />
+              $p = 1/37 \approx 2.7\%$. Ұтыс — 35:1. <br />
+              $E = (1/37) \cdot 35 - (36/37) \cdot 1 = -0.027$. <br />
               Бұл дегеніміз, әрбір тігілген 1000 теңгеден сіз <b>27 теңге</b> жоғалтасыз.
             </p>
           </div>
